@@ -1,0 +1,236 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background: #f1f5fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+textarea {
+    width: 90%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.status {
+    color: green;
+    margin-top: 10px;
+}
+ Day 10 — chat history & polish *
+#chatHistory {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+#chatMessages .msg {
+  text-align: left;
+  background: #fff;
+  border-left: 4px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+#chatMessages .msg.user {
+  border-left-color: #3b82f6; /* blue 
+}
+
+#chatMessages .msg.assistant {
+  border-left-color: #10b981; /* green 
+}
+
+details > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+audio {
+  width: 100%;
+  outline: none;
+}
+
+/* subtle button feedback 
+button {
+  transition: filter 0.15s ease, transform 0.02s ease;
+}
+button:hover { filter: brightness(0.98); }
+button:active { transform: translateY(1px); }
+button:disabled { opacity: 0.6; cursor: not-allowed; } */
+
+
+
+/* Base */
+:root {
+  --bg: #f1f5fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #111827;
+  --primary: #2563eb;
+  --success: #10b981;
+  --danger: #ef4444;
+  --ring: rgba(37,99,235,0.25);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+}
+
+.container {
+  width: 680px;
+  background: var(--card);
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.appTitle {
+  margin: 0 0 14px;
+  font-size: 1.4rem;
+  letter-spacing: 0.2px;
+}
+
+/* Toggle Mic Button */
+.micBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 22px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--primary);
+  color: white;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+  transition: transform 0.06s ease, filter 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.micBtn:hover { filter: brightness(1.02); }
+.micBtn:active { transform: translateY(1px); }
+.micBtn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.micIcon { font-size: 1.15rem; }
+.micLabel { font-weight: 600; }
+
+/* Pulse animation when recording */
+.pulse {
+  pointer-events: none;
+  position: absolute;
+  inset: -6px -10px;
+  border-radius: 999px;
+  opacity: 0;
+}
+.micBtn.recording .pulse {
+  opacity: 1;
+  animation: pulse 1.4s ease-out infinite;
+  box-shadow: 0 0 0 0 var(--ring);
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--ring); }
+  70% { box-shadow: 0 0 0 18px rgba(37,99,235,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+}
+
+/* Status */
+.status {
+  margin-top: 10px;
+  color: var(--success);
+  font-weight: 600;
+}
+.status.error { color: var(--danger); }
+.hidden { display: none !important; }
+
+/* LLM text */
+.llmBox {
+  text-align: left;
+  margin: 14px 0 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fafafa;
+}
+.llmBox summary { cursor: pointer; font-weight: 600; }
+.llmBox pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 6px 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* Chat History */
+#chatHistory {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  max-height: 260px;
+  overflow: auto;
+  text-align: left;
+}
+
+#chatMessages .msg {
+  background: #fff;
+  border-left: 4px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+#chatMessages .msg.user { border-left-color: #3b82f6; }
+#chatMessages .msg.assistant { border-left-color: #10b981; }
+
+/* Reset button */
+.resetBtn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.02s ease;
+}
+.resetBtn:hover { background: #f9fafb; }
+.resetBtn:active { transform: translateY(1px); }
