@@ -7,7 +7,6 @@ Built as part of **#30DaysofVoiceAgents** by [Murf AI](https://murf.ai).
 ---
 
 ## 📸 UI Screenshots
-## 📸 UI Screenshots
 
 ![Starting page](https://raw.githubusercontent.com/Anil970198/30-Days-of-AI-Agent/abd868c17d697f96567831519038948afb6e2f94/images/day%2012%203.jpg)
 
@@ -188,4 +187,5 @@ Go to: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 ## 📜 License
 
 MIT — see `LICENSE` file.
+
 
