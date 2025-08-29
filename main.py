@@ -62,10 +62,19 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
 # Paths
-app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
-templates = Jinja2Templates(directory="templates")
-os.makedirs("uploads", exist_ok=True)
+# Paths (robust for cloud deploys)
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+STATIC_DIR = BASE_DIR / "static"
+TEMPLATE_DIR = BASE_DIR / "templates"
+UPLOAD_DIR = BASE_DIR / os.getenv("UPLOAD_DIR", "uploads")  # optional override
+
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)  # ensure exists before mount
+
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+templates = Jinja2Templates(directory=str(TEMPLATE_DIR))
 
 # ---- Chat history (in-memory) ----
 from typing import Dict
@@ -231,15 +240,16 @@ def generate_audio(input: TextInput, request: Request):
 @app.post("/upload-audio")
 async def upload_audio(file: UploadFile = File(...)):
     try:
-        file_path = f"uploads/{file.filename}"
+        file_path = UPLOAD_DIR / file.filename
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
-
+        
         return {
             "filename": file.filename,
             "content_type": file.content_type,
-            "size_kb": round(os.path.getsize(file_path) / 1024, 2)
+            "size_kb": round((file_path.stat().st_size) / 1024, 2),
         }
+
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
@@ -579,3 +589,4 @@ async def agent_chat(session_id: str, file: UploadFile = File(...), request: Req
             "error": str(e),
             "fallback_text": "I'm having trouble connecting right now"
         })
+
