@@ -25,7 +25,7 @@ Built as part of **#30DaysofVoiceAgents** by [Murf AI](https://murf.ai).
 
 ---
 
-## 🛠️ Dedicated Section: Special Skills
+## 🛠️ Special Skills
 
 This agent goes beyond basic conversation by using a powerful skill-based, intent-first architecture. For specific queries, it bypasses the general LLM to execute dedicated functions, resulting in faster, more accurate, and factual responses.
 
@@ -52,6 +52,7 @@ User Speaks → AssemblyAI (STT) → Intent Match? ┬→ YES → Execute Skill 
                                               └→ NO  → Google Gemini → Murf AI (TTS) → User Hears Reply
 ````
 
+![Terminal output](https://github.com/Anil970198/30-Days-of-AI-Agent/blob/25e88c13a12dd1e7df11ee0e10c6824e8dd016ae/images/special%20skills.jpg)
 **Flow:**
 
 1.  Audio is transcribed by **AssemblyAI**.
@@ -254,3 +255,4 @@ MIT — see `LICENSE` file.
 
 ```
 ```
+
