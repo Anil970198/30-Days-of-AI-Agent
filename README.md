@@ -1,4 +1,4 @@
-# 🎙 Conversational Voice Agent
+# 🎙 Auralis Conversational Voice Agent
 
 🗣️ **Talk to your AI — get human-like responses back in real time.**
 Powered by **AssemblyAI** (Speech-to-Text) + **Google Gemini** (LLM) + **Murf AI** (Text-to-Speech).
@@ -255,4 +255,5 @@ MIT — see `LICENSE` file.
 
 ```
 ```
+
 
