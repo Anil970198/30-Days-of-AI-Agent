@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎙 Voice Agent - Clean & Fast</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Config -->
+        <div class="topbar">
+            <h1 class="appTitle">🎙 Voice Agent</h1>
+            <div class="topbar-actions">
+                <button id="configBtn" class="ghostBtn" title="Configure API Keys">⚙️ Config</button>
+                <button id="resetSessionBtn" class="ghostBtn" title="Reset Session">🔄 Reset</button>
+            </div>
+        </div>
+
+        <!-- Main Recording Control -->
+        <div class="main-controls">
+            <button id="recordToggle" class="micBtn" role="button" tabindex="0" aria-pressed="false">
+                <div class="pulse"></div>
+                <span class="micIcon">🎤</span>
+                <span class="micLabel">Start Recording</span>
+            </button>
+        </div>
+
+        <!-- Status Message -->
+        <div id="status" class="status hidden"></div>
+
+        <!-- AI Response (Collapsible) -->
+        <div id="llmTextSection" class="llmBox hidden">
+            <details>
+                <summary>💬 Assistant Response</summary>
+                <pre id="llmText"></pre>
+            </details>
+        </div>
+
+        <!-- Conversation History -->
+        <div id="chatHistory">
+            <h3>💬 Conversation History</h3>
+            <div id="chatMessages">
+                <!-- Chat messages will appear here -->
+            </div>
+        </div>
+
+        <!-- Hidden Audio Player -->
+        <audio id="botPlayer" class="hidden" preload="auto" controls></audio>
+    </div>
+
+    <!-- Configuration Modal -->
+    <dialog id="configDialog" class="configDialog">
+        <form class="configForm">
+            <h3>⚙️ API Configuration</h3>
+            
+            <label>
+                🎵 Murf AI API Key:
+                <input type="password" id="cfgMurf" placeholder="Enter Murf API key">
+            </label>
+            
+            <label>
+                🎤 AssemblyAI API Key:
+                <input type="password" id="cfgAAI" placeholder="Enter AssemblyAI API key">
+            </label>
+            
+            <label>
+                🤖 Gemini API Key:
+                <input type="password" id="cfgGemini" placeholder="Enter Gemini API key">
+            </label>
+            
+            <label>
+                🌤️ Weather API Key:
+                <input type="password" id="cfgWeather" placeholder="Enter OpenWeatherMap API key">
+            </label>
+            
+            <label>
+                🔍 Search API Key:
+                <input type="password" id="cfgSearch" placeholder="Enter Tavily API key">
+            </label>
+            
+            <label>
+                🎭 Persona:
+                <select id="cfgPersona">
+                    <option value="neutral">😊 Neutral</option>
+                    <option value="robot">🤖 Robot</option>
+                    <option value="pirate">🏴‍☠️ Pirate</option>
+                    <option value="coach">💪 Coach</option>
+                </select>
+            </label>
+            
+            <label class="checkbox-label">
+                <input type="checkbox" id="webSearchToggle">
+                🌐 Enable Web Search
+            </label>
+            
+            <div id="cfgStatus" class="status hidden"></div>
+            
+            <div class="configActions">
+                <button type="button" id="closeCfg" class="ghostBtn">Cancel</button>
+                <button type="button" id="saveCfg" class="primaryBtn">Save</button>
+            </div>
+        </form>
+    </dialog>
+
+
+    <!-- Help Information (Optional) -->
+    <div class="help-info hidden" id="helpInfo">
+        <h4>🎯 How to Use:</h4>
+        <ul>
+            <li><strong>Click the mic</strong> to start recording</li>
+            <li><strong>Ask for weather:</strong> "What's the weather in Tokyo?"</li>
+            <li><strong>Do calculations:</strong> "Calculate 25 times 16"</li>
+            <li><strong>General chat:</strong> Ask anything!</li>
+        </ul>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
