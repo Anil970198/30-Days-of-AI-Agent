@@ -1,0 +1,301 @@
+/* CSS Variables */
+:root {
+    --bg: #f1f5fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --text: #111827;
+    --primary: #2563eb;
+    --success: #10b981;
+    --danger: #ef4444;
+    --ring: rgba(37,99,235,0.25);
+}
+
+/* Base Styles */
+* { box-sizing: border-box; }
+
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+}
+
+.container {
+    width: 680px;
+    background: var(--card);
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+/* Header */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.appTitle {
+    margin: 0;
+    font-size: 1.4rem;
+    letter-spacing: 0.2px;
+}
+
+.topbar-actions { 
+    display: flex; 
+    gap: 8px; 
+}
+
+.ghostBtn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.ghostBtn:hover { 
+    background: #f9fafb; 
+}
+
+/* Main Recording Button */
+.main-controls {
+    margin: 30px 0;
+}
+
+.micBtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 30px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--primary);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(37,99,235,0.35);
+    transition: transform 0.06s ease, filter 0.2s ease;
+    outline: none;
+}
+
+.micBtn:hover { 
+    filter: brightness(1.05); 
+}
+
+.micBtn:active { 
+    transform: translateY(1px); 
+}
+
+.micBtn:disabled { 
+    opacity: 0.65; 
+    cursor: not-allowed; 
+}
+
+.micIcon { 
+    font-size: 1.2rem; 
+}
+
+/* Recording Pulse Animation */
+.pulse {
+    pointer-events: none;
+    position: absolute;
+    inset: -8px -12px;
+    border-radius: 999px;
+    opacity: 0;
+}
+
+.micBtn.recording .pulse {
+    opacity: 1;
+    animation: pulse 1.4s ease-out infinite;
+    box-shadow: 0 0 0 0 var(--ring);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--ring); }
+    70% { box-shadow: 0 0 0 20px rgba(37,99,235,0); }
+    100% { box-shadow: 0 0 0 0 rgba(37,99,235,0); }
+}
+
+/* Status Messages */
+.status {
+    margin: 15px 0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--success);
+    background: rgba(16,185,129,0.1);
+}
+
+.status.error { 
+    color: var(--danger);
+    background: rgba(239,68,68,0.1);
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+/* LLM Response Box */
+.llmBox {
+    text-align: left;
+    margin: 20px 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fafafa;
+}
+
+.llmBox summary { 
+    cursor: pointer; 
+    font-weight: 600; 
+    color: var(--primary);
+}
+
+.llmBox pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 10px 0 0;
+    font-family: ui-monospace, monospace;
+    line-height: 1.5;
+}
+
+/* Chat History */
+#chatHistory {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    max-height: 300px;
+    overflow: auto;
+    text-align: left;
+}
+
+#chatHistory h3 {
+    margin: 0 0 15px;
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+.msg {
+    background: #fff;
+    border-left: 4px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+}
+
+.msg.user { 
+    border-left-color: var(--primary); 
+}
+
+.msg.assistant { 
+    border-left-color: var(--success); 
+}
+
+/* Configuration Modal */
+.configDialog {
+    border: 0;
+    border-radius: 12px;
+    padding: 0;
+    backdrop-filter: blur(4px);
+}
+
+.configDialog::backdrop { 
+    background: rgba(0,0,0,0.3); 
+}
+
+.configForm {
+    padding: 20px;
+    min-width: 400px;
+    max-width: 500px;
+}
+
+.configForm h3 { 
+    margin: 0 0 20px;
+    color: var(--text);
+}
+
+.configForm label { 
+    display: block; 
+    text-align: left; 
+    margin: 15px 0; 
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.configForm input, 
+.configForm select {
+    width: 100%; 
+    padding: 10px 12px; 
+    border: 1px solid #e5e7eb; 
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 0.95rem;
+}
+
+.configForm input:focus,
+.configForm select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+.configActions { 
+    display: flex; 
+    gap: 10px; 
+    justify-content: flex-end; 
+    margin-top: 20px; 
+}
+
+.primaryBtn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 0;
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.primaryBtn:hover { 
+    filter: brightness(1.05); 
+}
+
+/* Audio Player */
+audio {
+    width: 100%;
+    margin: 10px 0;
+    outline: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .topbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .micBtn {
+        padding: 16px 24px;
+        font-size: 1rem;
+    }
+}
